@@ -1,0 +1,33 @@
+﻿@section Scripts{
+    <link href="~/css/PlatteCondition.css" rel="stylesheet" />
+    <link href="~/css/errorpop.css" rel="stylesheet" />
+    <script>
+    </script>
+}
+
+<style>
+    .pallet-main-squre {
+    color: white;
+    font-size: 29px;
+    font-weight: bold;
+    /* align-content: center; */
+    /* text-align: center; */
+    width: 52%;
+    text-align: center;
+    height: 340px;
+    margin-left: 20%;
+    margin-top: 2%;
+}
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="pallet-main-squre col-sm-12 col-md-12 col-lg-12 ">
+            <p>Order No# @Html.Raw(Json.Serialize(ViewBag.RefNo))</p>
+            <p>QA Assestment complete</p>
+        </div>
+        <div class="col-md-12 col-sm-12 col-lg-12 bh-continue-button-dev">
+            <button id="Continue" type="button" class="btn btn-light bh-continue-button">Continue <i class="fa-solid fa-circle-arrow-right"></i></button>
+        </div>
+    </div>
+</div>

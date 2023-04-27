@@ -1,0 +1,9 @@
+﻿.dataTables_wrapper{
+   overflow:scroll !important
+}
+.bh-main-p{
+    color: white;
+    font-family: fangsong;
+    /* font-weight: bold; */
+    font-size: 44px;
+}

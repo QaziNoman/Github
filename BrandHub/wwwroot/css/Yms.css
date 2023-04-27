@@ -1,0 +1,29 @@
+﻿
+.yms-col {
+    margin-top: 31px;
+}
+.bh-continue-button-dev{
+    top:89%
+}
+.yms-main-p {
+    margin-left: 13%;
+    color: white;
+    font-size: 52px;
+    font-weight: 600;
+}
+input {
+    color: black !important;
+    font-size: 36px;
+    height: 102px;
+    width: 635px;
+    border-top-right-radius: 22px;
+    border-bottom-right-radius: 22px;
+    /* text-align: center; */
+    font-weight: bold;
+    padding-left: 2px
+}
+
+::placeholder {
+    color: black;
+ 
+}

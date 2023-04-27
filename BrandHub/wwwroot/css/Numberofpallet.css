@@ -1,0 +1,53 @@
+﻿.bh-main-container-p {
+    color: white;
+    font-weight: bold;
+    margin-left: 5%;
+    font-size: 41px;
+}
+.pallet-radiobutton-main-dev {
+    margin-left: 5%;
+}
+.bh-Numberselectbox {
+    margin-top: 5%;
+    /* float: right; */
+    /* text-align: center; */
+    margin-left: 8%;
+}
+
+.bh-Numberselectbox-label {
+ 
+    color: white;
+    font-size: 43px;
+}
+.bh-Numberselectbox-box {
+    font-size: 37px;
+    width: 178px;
+    text-align: center;
+    border-radius: 10px;
+    height: 72px;
+}
+.boxed label {
+    border-radius: 10px;
+    display: inline-block;
+    width: 121px;
+    padding: 12px;
+    border: solid darkblue;
+    transition: all 0.3s;
+    margin: 5px;
+    background: #4472c4;
+    color: white;
+    font-size: 71px;
+    text-align: center;
+}
+
+.boxed input[type="radio"] {
+    display: none;
+}
+.box {
+    border-color:darkblue;
+   
+}
+
+    .boxed input[type="radio"]:checked + label {
+        border: solid 2px yellow;
+    }

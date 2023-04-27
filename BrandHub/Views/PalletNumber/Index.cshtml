@@ -1,0 +1,124 @@
+﻿@section Scripts{
+ <link href="~/css/numberofpallet.css" rel="stylesheet" />
+ <link href="~/css/errorpop.css" rel="stylesheet" />
+    <script>
+        $("#select_box").change(function () {
+            $("input[name='skills']:checked+label").css("border", "none");
+            $("input:radio[name=skills]").attr("disabled", true);
+            $("input:radio[name=skills]").css("border", "none");
+        })
+       
+        $("#Continue").click(function () { 
+               var answer="";
+               var radioValue = $("input[name='skills']:checked").val();
+               var select = $("#select_box option:selected").val();
+            if(radioValue!=null){
+                answer=radioValue;
+            }
+            if (select != ""){
+                $("input[name='skills']:checked").css('border-color', 'darkblue')
+                answer=select;
+            }
+            if(answer==""){
+              $('.alert').addClass("show");
+                $('.alert').removeClass("hide");
+                $('.alert').addClass("showAlert");
+                setTimeout(function () {
+                    $('.alert').removeClass("show");
+                    $('.alert').addClass("hide");
+                }, 5000);
+            }
+            else{
+            var refer = @Html.Raw(Json.Serialize(ViewBag.refer));
+            var question="Confirm the number of pallet associated with this order";
+            $.ajax(
+                {
+                    type: 'POST',
+                    dataType: 'JSON',
+                    url: '/PalletNumber/SetAnswer',
+                    data: { answer: answer, question: question, refNo: refer },
+                    success:
+                        function (response) {
+                               
+                                window.location.href = "/SkuConfirmation/Index?refNo=" + refer + "&totalPallet=" + answer
+                            // Generate HTML table.
+                            // convertJsonToHtmlTable(JSON.parse(response), $("#TableId"));
+                        },
+                    error:
+                        function (response) {
+                            // alert("Error: " + response);
+                        }
+                });
+            }
+        });
+    </script>
+}
+<div class="alert hide">
+    <span class="fas fa-exclamation-circle" style="color: #fe7171;font-size:30px"> </span>
+    <span class="msg">Error: please Select the number !</span>
+    <div class="close-btn">
+        <span Sty class="fas fa-times"></span>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 bh-main-container-p">
+            <p>
+                Confirm the number of pallet associated with this order
+            </p>
+        </div>
+
+        <div class="pallet-radiobutton-main-dev col-sm-12 col-md-12 col-lg-12 d-inline-flex">
+            <form class="boxed d-inline-flex">
+                <input type="radio" value="1" class="rad" id="RadioButton-1" name="skills">
+                <label for="RadioButton-1">1</label>
+
+                <input type="radio" value="2" class="rad" id="RadioButton-2" name="skills">
+                <label for="RadioButton-2">2 </label>
+
+                <input type="radio" value="3" class="rad" id="RadioButton-3" name="skills">
+                <label for="RadioButton-3">3 </label>
+
+                <input type="radio" value="4" class="rad"  id="RadioButton-4" name="skills">
+                <label for="RadioButton-4">4 </label>
+
+                <input type="radio" value="5" class="rad" id="RadioButton-5" name="skills">
+                <label for="RadioButton-5">5 </label>
+
+                <input type="radio" value="6" class="rad" id="RadioButton-6" name="skills">
+                <label for="RadioButton-6">6 </label>
+
+                <input type="radio" value="7" class="rad"  id="RadioButton-7" name="skills">
+                <label for="RadioButton-7">7</label>
+
+                <input type="radio" value="8" class="rad" id="RadioButton-8" name="skills">
+                <label for="RadioButton-8">8</label>
+
+
+            </form>
+        </div>
+        <div class="col-md-12 col-sm-12 col-lg-12 bh-Numberselectbox">
+            <span class="bh-Numberselectbox-label">More then :</span>
+            <select class="bh-Numberselectbox-box" id="select_box">
+                <option hidden disabled selected value=''> select  </option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+
+
+            </select>
+        </div>
+        <div class="col-md-12 col-sm-12 col-lg-12 bh-continue-button-dev">
+            <button type="button" id="Continue" class="btn btn-light bh-continue-button">Continue <i class="fa-solid fa-circle-arrow-right"></i></button>
+        </div>
+    </div>
+</div>

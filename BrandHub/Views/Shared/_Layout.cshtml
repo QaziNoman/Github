@@ -1,0 +1,73 @@
+﻿
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor Accessor
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - B2BQA</title>
+    <link href="~/lib/font-awesome/css/all.min.css" rel="stylesheet" />
+    <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
+ 
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/B2BQA.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Main.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="~/js/login.js"></script>
+    
+</head>
+<body>
+    <header>
+        <div class="container-fluid main-dev" >
+            <div class="row ">
+<div class="col-lg-6 col-md-6 bh-header-logo-left ">
+                    <a href="/OrderListtable">
+                        <img src="~/Images/brandhub-logo.png" alt="Girl in a jacket" width="409px" height="58px">
+                    </a>
+                </div>
+
+                <div class="bh-header-logo-right col-md-6 ">
+                    @if (Accessor.HttpContext.Session.GetString("typeId") != null)
+                    {
+                        if (Accessor.HttpContext.Session.GetString("typeId") == "1")
+                        {
+                              <img src="~/Images/b2b-tick.png" alt="Girl in a jacket" width="61px" height="50px">
+                            <span class="bh-header-logo-right-text ">YMS</span>
+                        }
+                        else
+                        {
+                            <img src="~/Images/b2b-tick.png" alt="Girl in a jacket" width="61px" height="50px">
+                            <span class="bh-header-logo-right-text ">B2BQA</span>
+                            
+                        }
+
+                    }
+
+                   
+                        
+                    </div>
+                
+            </div>
+        </div>
+    </header>
+    <div class=" bh-main-container col-md-12 col-sm-12 col-lg-12 container-fluid">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/font-awesome/js/all.min.js"></script>
+    <script src="~/lib/font-awesome/js/all.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

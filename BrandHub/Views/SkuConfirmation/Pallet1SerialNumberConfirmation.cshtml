@@ -1,0 +1,149 @@
+﻿@section Scripts{
+    <link href="~/css/errorpop.css" rel="stylesheet" />
+    <link href="~/css/qrscanner.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/3.3.3/adapter.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+            $('#startScanner').click(function () {
+
+                Instascan.Camera.getCameras().then(function (cameras) {
+                    if (cameras.length > 0) {
+                        scanner.start(cameras[0]);
+
+                    } else {
+                        alert('No cameras found');
+                    }
+
+                }).catch(function (e) {
+                    console.error(e);
+                });
+
+                scanner.addListener('scan', function (c) {
+                    document.getElementById('bar-input').value = c;
+                });
+            });
+
+
+
+            $("#stopScanner").click(function () {
+                Instascan.Camera.getCameras().then(function (cameras) {
+                    if (cameras.length > 0) {
+                        scanner.stop(cameras[0]);
+
+                    } else {
+                        alert('No cameras found');
+                    }
+
+                }).catch(function (e) {
+                    console.error(e);
+                });
+
+
+
+
+
+
+            });
+
+
+
+
+
+
+        });
+
+
+        $("#Continue").click(function () {
+
+
+            var answer = $("#bar-input").val();
+
+
+
+            if (answer == "") {
+
+                $('.alert').addClass("show");
+                $('.alert').removeClass("hide");
+                $('.alert').addClass("showAlert");
+                setTimeout(function () {
+                    $('.alert').removeClass("show");
+                    $('.alert').addClass("hide");
+                }, 5000);
+
+
+
+            }
+            else {
+                var refer = @Html.Raw(Json.Serialize(ViewBag.refer));
+                var question = "Confirm the Sku";
+                $.ajax(
+                    {
+                        type: 'POST',
+                        dataType: 'JSON',
+                        url: '/SkuConfirmation/SetAnswer',
+                        data: { answer: answer, question: question, refNo: refer },
+                        success:
+                            function (response) {
+                             
+                                window.location.href = "/SavingImages/TopImage?refNo=" + refer;
+                                // Generate HTML table.
+                                // convertJsonToHtmlTable(JSON.parse(response), $("#TableId"));
+                            },
+                        error:
+                            function (response) {
+                                // alert("Error: " + response);
+                            }
+                    });
+            }
+
+
+
+
+
+
+        });
+
+
+
+    </script>
+
+}
+<div class="alert hide">
+    <span class="fas fa-exclamation-circle" style="color: #fe7171;font-size:30px"> </span>
+    <span class="msg">Error: please Select the number !</span>
+    <div class="close-btn">
+        <span Sty class="fas fa-times"></span>
+    </div>
+</div>
+
+<div class="continer-fluid">
+    <div class="row">
+        <div class="bh-main-container col-md-12 ">
+            <p class="bh-main-container-p">Confirm serial from  pallet 1 SKU</p>
+        </div>
+        <div class="bh-vediocam-dev col-md-12 d-inline-flex">
+            <div class="bh-vediocam-dev-vedio col-md-3  d-inline-flex"><video id="preview" width="100%"></video></div>
+            <div class="bh-vediocam-dev-vedio-bar-dev  col-md-9 ">
+                <div style="margin-top: 30px;" class="col-md-12   d-inline-flex">
+                    <div><img src="~/Images/brcode.png" id="br-image" alt="Girl in a jacket"></div>
+                    <div class="bh-vediocam-dev-vedio-bar-dev-input"><input type="text" readonly id="bar-input" /></div>
+                </div>
+
+                <div style="margin-top: 39px; padding-left:70px" class="col-md-12  d-inline-flex">
+                    <div><button class="bh-br-scanbutton" id="startScanner">Scan SKU<img class="bh-br-scanbutton-img" src="~/images/rightarrow.png" /></button></div>
+                    <div><button class="bh-br-scanbutton-stop" id="stopScanner">Stop SKU<img class="bh-br-scanbutton-img" src="~/images/rightarrow.png" /></button></div>
+                </div>
+
+
+
+
+            </div>
+
+
+        </div>
+        <div class="bh-button-continue-dev"><button class="bh-br-scanbutton-stop" id="Continue">Continue<img class="bh-br-scanbutton-img" src="~/images/rightarrow.png" /></button></div>
+    </div>
+</div>

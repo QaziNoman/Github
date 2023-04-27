@@ -1,0 +1,82 @@
+﻿@section Scripts{
+    <link href="~/css/PlatteCondition.css" rel="stylesheet" />
+    <link href="~/css/errorpop.css" rel="stylesheet" />
+    <script>
+        $("#Continue").click(function () {
+            var radioValue = $("input[name='flexRadioDefault']:checked").val();
+            var flag = false;
+            var refNo = @Html.Raw(Json.Serialize(ViewBag.RefNo));
+            var ans = "yes";
+            var question = "Confirm label is stuck to all 2 pallets"
+            if ("YES" == radioValue) {
+                $.ajax(
+                    {
+                        type: 'POST',
+                        dataType: 'JSON',
+                        url: '/OrderListtable/QuestionSubmittion',
+                        data: { reference: refNo, answer: ans, question: question },
+                        success:
+                            function (response) {
+
+                                window.location.href = "/home/AssistmentComplete?refNo=" + refNo;
+                                // Generate HTML table.
+                                // convertJsonToHtmlTable(JSON.parse(response), $("#TableId"));
+                            },
+                        error:
+                            function (response) {
+                                // alert("Error: " + response);
+                            }
+                    });
+
+            } else {
+                // $("#Continue").hide();
+                $('.alert').addClass("show");
+                $('.alert').removeClass("hide");
+                $('.alert').addClass("showAlert");
+                setTimeout(function () {
+                    $('.alert').removeClass("show");
+                    $('.alert').addClass("hide");
+                }, 5000);
+            }
+        });
+    </script>
+}
+<div class="alert hide">
+    <span class="fas fa-exclamation-circle" style="color: #fe7171;font-size:30px"> </span>
+    <span class="msg">Error: please Replace the Pallet As <br />it will not be accepted in poor condition !</span>
+    <div class="close-btn">
+        <span Sty class="fas fa-times"></span>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 bh-main-container-p">
+            <p>
+                Confirm label is stuck to all 2 pallets.
+            </p>
+        </div>
+        <div class="pallet-main-squre col-sm-12 col-md-12 col-lg-12 d-inline-flex">
+            <div class="Radiobutton-dev col-md-6">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" value="YES" id="Radiobutto-yes" checked>
+                </div>
+                <div class=hb-dev-icon>
+                    <i class="fa-solid fa-circle-check"></i>
+                    YES
+                </div>
+            </div>
+            <div class="Radiobutton-dev col-md-6">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" value="NO" id="Radiobutto-no" checked>
+                </div>
+                <div class="hb-dev-icon">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                    NO
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-lg-12 bh-continue-button-dev">
+            <button id="Continue" type="button" class="btn btn-light bh-continue-button">Continue <i class="fa-solid fa-circle-arrow-right"></i></button>
+        </div>
+    </div>
+</div>

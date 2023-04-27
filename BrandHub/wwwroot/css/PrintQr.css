@@ -1,0 +1,52 @@
+﻿.bh-main-container-p {
+    color: white;
+    font-weight: bold !important;
+    font-size: 35px;
+}
+.bh-main-container {
+    margin-top: 2% !important;
+    margin-left: -3% !important;
+}
+select:focus {
+    min-width: 150px;
+    width: auto;
+}
+.bh-qr-p{
+    color: white;
+    font-size: 29px;
+    font-weight: bold;
+}
+.bh-main-content {
+    margin-top: 39px;
+    margin-left: -9%;
+}
+select {
+    margin-top: 4%;
+    height: 56px;
+    font-size: 20px;
+}
+#station select {
+    background: transparent;
+    width: 260px;
+    padding: 5px;
+    font-size: 15px;
+    line-height: 1;
+    border: 0;
+    border-radius: 0;
+    height: 34px;
+    -webkit-appearance: none;
+    font-family: helvetica-roman;
+    color: #9C9C9C;
+    background-color: rgba(0, 0, 0, 0);
+    -webkit-appearance: none;
+    border: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+}
+
+
+#Continue{
+    font-size: 35px;
+    /* border: 52px; */
+    border-radius: 11px;
+}

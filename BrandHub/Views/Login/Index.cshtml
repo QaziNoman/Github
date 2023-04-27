@@ -1,0 +1,110 @@
+﻿@model BrandHub.Map.Models.UserModel;
+@section Scripts{
+    <script>
+        $(function () {
+            var typeId = @Html.Raw(Json.Serialize(TempData["typeId"] ));
+            if (typeId == 1) {
+                $('#yms-tab').click();
+            }
+        });
+        function HideShowPassword() {
+            if ($('#brandhub-QA-password').attr('type') == 'password') {
+                $('#brandhub-QA-password').attr('type', 'text');
+            } else {
+                $('#brandhub-QA-password').attr('type', 'password');
+            }
+        }
+        function HideShowYMSPassword() {
+            if ($('#YMSPassword').attr('type') == 'password') {
+                $('#YMSPassword').attr('type', 'text');
+            } else {
+                $('#YMSPassword').attr('type', 'password');
+            }
+        }
+    </script>
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="bh-login-container">
+                <ul class="nav nav-tabs bh-login-tab" id="myTab" role="tablist">
+                    <li class="nav-item bh-login-tab-item" role="presentation">
+                        <button class="nav-link bh-login-tab-item-link active" id="b2b-qa-tab" data-bs-toggle="tab" data-bs-target="#b2b-qa" type="button" role="tab" aria-controls="b2b-qa" aria-selected="true"><img src="~/Images/b2b-tick.png" alt="Girl in a jacket"><p>B2B QA</p></button>
+                    </li>
+                    <li class="nav-item bh-login-tab-item" role="presentation">
+                        <button class="nav-link bh-login-tab-item-link" id="yms-tab" data-bs-toggle="tab" data-bs-target="#yms" type="button" role="tab" aria-controls="yms" aria-selected="false"><img style="display:t" src="~/Images/b2btruck.png" alt="Girl in a jacket"><p>YMS</p></button>
+                    </li>
+                </ul>
+                <div class="tab-content bh-login-tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active bh-login-tab-pane" id="b2b-qa" role="tabpanel" aria-labelledby="b2b-qa-tab">
+                        <form asp-action="LoginPost" method="post" asp-controller="Login">
+                            <label for="b2bUserName" class="form-label bh-login-tab-pane-lable">Login to BrandHub B2B QA APP</label>
+                            <div class="bh-input-username input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user"></i></span>
+                                <input id="brandhub-QA-UserName" type="text" required class="form-control" placeholder="Username" asp-for="Username" aria-label="Username" aria-describedby="basic-addon1">
+
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"></i></span>
+                                <input id="brandhub-QA-password" required type="password" asp-for="Password" class="form-control" aria-label="Password" aria-describedby="basic-addon1" placeholder="Password">
+                                <span class="input-group-text" id="basic-addon1" onclick="HideShowPassword()"> <i class="fa-solid fa-eye-slash"></i></span>
+                            </div>
+
+                            @if (TempData["Status"] != null)
+                            {
+                                if (TempData["typeId"].ToString() == "0")
+                                {
+                                    <label id="brandhub-QA-errorMessage">@TempData["Status"].ToString()</label>
+                                }
+                            }
+                            <input hidden type="text" asp-for="typeId" value="0">
+                            <div class="input-group mb-3">
+                                <button type="submit" class="btn bh-btn-submit btn-primary" id="bh-login-submit">login</button>
+                            </div>
+                            <hr />
+                            <div class="bh-login-Forgot-password input-group mb-3">
+                                <span class="bh-login-Forgot-password-label">Forgotten Password?</span>
+                                <br />
+                                <span>Don't have an account?Contact IT</span>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade bh-login-tab-pane" id="yms" role="tabpanel" aria-labelledby="yms-tab">
+                        <form asp-action="LoginPost" method="post" asp-controller="Login">
+                            <label for="b2bUserName" class="form-label bh-login-tab-pane-lable">Login to BrandHub B2B YMS APP</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user"></i></span>
+                                <input id="b2bUserName" type="text" asp-for="Username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"></i></span>
+                                <input id="YMSPassword" type="password" asp-for="Password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+                                <span class="input-group-text" id="basic-addon1" onclick="HideShowYMSPassword()"> <i class="fa-solid fa-eye-slash"></i></span>
+
+                            </div>
+
+                            @if (TempData["Status"] != null)
+                            {
+                                if (TempData["typeId"].ToString() == "1")
+                                {
+                                    <label id="brandhub-QA-errorMessage">@TempData["Status"].ToString()</label>
+                                }
+                            }
+                            <input hidden type="text" asp-for="typeId" value="1">
+                            <div class="input-group mb-3">
+                                <button type="submit" class="btn bh-btn-submit btn-primary" id="bh-login-submit">login</button>
+                            </div>
+                            <hr />
+                            <div class="bh-login-Forgot-password input-group mb-3">
+                                <span class="bh-login-Forgot-password-label">Forgotten Password?</span>
+                                <br />
+                                <span>Don't have an account?Contact IT</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

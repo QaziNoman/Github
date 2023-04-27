@@ -1,0 +1,93 @@
+﻿
+
+
+@media screen and (min-width: 1320px) {
+
+
+    .bh-main-container-p {
+        color: white;
+        font-weight: bold;
+        margin-left: 5%;
+        font-size: 40px;
+        margin-top: -2%;
+        margin-left: 101px;
+    }
+}
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    margin-left: 68px;
+}
+
+.bh-main-container-p {
+    color: white;
+    font-weight: bold;
+    font-size: 44px;
+    margin-top: -2%;
+    margin-left: 101px;
+}
+
+.Radiobutto-dev-yes {
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+    padding: 1% 4.5%;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 20px;
+    margin-left: 1%;
+    background: white;
+}
+
+.pallet-main-squre {
+    width: 52%;
+    text-align: center;
+    height: 399px;
+}
+
+.form-check {
+    display: block;
+    min-height: 1.5rem;
+    padding-left: 1.5em;
+    margin-bottom: 0.125rem;
+    float: right;
+    font-size: 32px;
+}
+.form-check-input {
+    width: 2.5em;
+    margin-right: 12px !important;
+    height: 2.5em;
+    margin-top: 0.25em;
+    vertical-align: top;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: 1px solid rgba(0,0,0,.25);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+}
+
+.hb-dev-icon {
+    font-size: 52px;
+    font-weight: bold;
+    margin-top: 32%;
+}
+
+
+.Radiobutton-dev {
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+    margin-bottom: 5%;
+    /* font-size: 51px; */
+    font-weight: bold;
+    border-radius: 20px;
+    margin-left: 25%;
+    margin-top: 10%;
+    background: white;
+    /* padding-top: 7%;
+}

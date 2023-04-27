@@ -1,0 +1,113 @@
+﻿#brandhub-QA-errorMessage {
+    color: #ba1e1e;
+    margin-left: 12%;
+    font-size: 12px;
+    font-weight: bold;
+    font-size: 16px;
+    background: #0070c0;
+    padding-left: 7px;
+    padding-right: 9px;
+    margin-bottom: -8px;
+}
+
+.bh-login-container {
+    width: 500px;
+    height: 300px;
+    margin: 0 auto;
+}
+
+.bh-login-tab {
+    border-bottom: #495057 !important;
+}
+
+.bh-login-tab-item{
+
+}
+
+
+.bh-login-tab-item-link {
+    color: white !important;
+    background-color: transparent !important;
+    border-color: none !important;
+    width:244px
+}
+
+    .bh-login-tab-item-link.active {
+        color: white !important;
+        background-color: #495057 !important;
+        border-color: #495057 !important;
+        width: 256px;
+    }
+
+.bh-login-tab-content {
+    background-color: #495057 !important;
+    height: 300px;
+}
+
+.bh-login-tab-pane{
+
+}
+.bh-login-Forgot-password{
+    display:block;
+    color:white;
+    margin-bottom:0px !important
+}
+.bh-login-Forgot-password-label {
+    font-weight: bold;
+
+}
+.bh-login-Forgot-password-p1 {
+    color: darkblue !important;
+}
+    .bh-input-username {
+        width: 60%;
+        margin: 10px;
+        margin-left: 62px;
+    }
+
+.form-label {
+    color: white;
+    font: unset;
+    margin-left: 65px;
+    margin-top: 10;
+    margin-top: 10px;
+}
+.input-group-text {
+
+}
+.bh-btn-submit {
+    margin-left: 203px;
+    width: 100px;
+    height: 36px;
+}
+.input-group-text {
+    border-bottom-left-radius: 8px;
+    border-top-left-radius: 8px;
+}
+.input-group{
+    margin-left:60px;
+    width:60%
+}
+
+.form-control {
+    border-bottom-right-radius: 8px;
+    border-top-right-radius: 8px;
+}
+hr {
+    margin-left:5%;
+     width: 90%;
+    color: white;
+    opacity:15.2;
+}
+
+
+@media only screen and (max-width:750px) {
+    
+    
+}
+
+@media only screen and (max-width:400px) {
+    /*i {
+        display: none !important;
+    }*/
+}

@@ -1,0 +1,215 @@
+﻿@section Scripts{
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script>
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: '/OrderListtable/GetAllOrder',
+                data: '{}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: OnSuccess,
+                failure: function (response) {
+
+                    $(".center-body").hide();
+                    alert(response.d);
+                },
+                error: function (response) {
+                    $(".center-body").hide();
+                    alert(response.d);
+                }
+            });
+        });
+
+
+        function OnSuccess(response) {
+            $(".center-body").hide();
+            var table = $("#example").DataTable(
+                {
+
+                    bLengthChange: true,
+                    lengthMenu: [[5, 10, -1], [5, 10, "All"]],
+                    bFilter: true,
+                    bSort: true,
+                    bPaginate: true,
+
+                    data: response,
+
+
+
+
+                    columns: [
+                        {
+                            'data': 'customerReference', "render": function (data, type, row) {
+                                var checkbox = "<div style='display: flex;'><div style='width: 20px;background-color :" + row.orderColor + ";height: 10px;border-radius: 10px;margin: 0 auto;'></div><div>" + data + "</div></div>";
+                                return checkbox;
+                            }
+                        },
+                        { 'data': 'orderReference' },
+                        { 'data': 'customerName' },
+                        {
+                            'data': 'orderDate', "render": function (data, type, row) {
+                                var date = new Date(row.orderDate).toLocaleDateString('en-CA')
+                                var checkbox = "<div style='display: flex;'>" + date + "</div>";
+                                return checkbox;
+                            }
+                        },
+                        {
+                            'data': 'expectedShipDate', "render": function (data, type, row) {
+                                var date = new Date(row.expectedShipDate).toLocaleDateString('en-CA')
+                                var checkbox = "<div style='display: flex;'>" + date + "</div>";
+                                return checkbox;
+                            }
+                        },
+                        { 'data': 'orderStatus' }, { 'data': 'sku' },
+                        { 'data': 'productDescription' },
+                        { 'data': 'productType' },
+                        { 'data': 'qty' }
+                    ]
+
+
+                });
+            var table = $('#example').DataTable();
+            $('#example tbody').on('click', 'tr', function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                } else {
+                    table.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+                //"render": function (data, type, row) {
+
+                //         return window.location.href = "/OrderListtable/UpdateOrder?refer=" + data.;;
+                //     }
+
+                var d = table.row(this).data();
+
+                return window.location.href = "/OrderListtable/UpdateOrder?refer=" + d.orderReference;
+
+
+            });
+        }
+    </script>
+}
+
+<div class="center-body">
+    <div class="loader-circle-2"></div>
+</div>
+
+<section class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- /.card -->
+                <div class="bh-main-p" style=" font-family: fangsong;color: white;font-size: 1.5rem;margin-left: 18px;font-weight: bold;"><p>Select to QA</p></div>
+                <div class="card">
+                    <div class="card-header">
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive ">
+
+                        <table id="example" class="table table-bordered table-striped ">
+                            <thead style="background-color:lightsteelblue">
+                                <tr>
+                                    <th>Customer Reference</th>
+                                    <th>Order Reference</th>
+                                    <th>Customer Name</th>
+                                    <th>Order Date</th>
+                                    <th>ExpectedShip Date</th>
+                                    <th>Order Status</th>
+                                    <th>SKU</th>
+                                    <th>Product Description</th>
+                                    <th>Product Type</th>
+                                    <th>Qty</th>
+
+
+                                </tr>
+                            </thead>
+
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</section>
+
+<style>
+    .center-body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /****** center box
+                width: 300px;
+                height: 300px;
+                border: solid 1px #aaa;
+                ******/
+    }
+
+    .loader-circle-2 {
+        position: relative;
+        width: 70px;
+        height: 70px;
+        display: inline-block;
+    }
+
+        .loader-circle-2:before,
+        .loader-circle-2:after {
+            content: "";
+            display: block;
+            position: absolute;
+            border-width: 5px;
+            border-style: solid;
+            border-radius: 50%;
+        }
+
+        .loader-circle-2:before {
+            width: 70px;
+            height: 70px;
+            border-bottom-color: #009688;
+            border-right-color: #009688;
+            border-top-color: transparent;
+            border-left-color: transparent;
+            animation: loader-circle-2-animation-2 1s linear infinite;
+        }
+
+        .loader-circle-2:after {
+            width: 40px;
+            height: 40px;
+            border-bottom-color: #e91e63;
+            border-right-color: #e91e63;
+            border-top-color: transparent;
+            border-left-color: transparent;
+            top: 22%;
+            left: 22%;
+            animation: loader-circle-2-animation 0.85s linear infinite;
+        }
+
+    @@keyframes loader-circle-2-animation {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(-360deg);
+        }
+    }
+
+    @@keyframes loader-circle-2-animation-2 {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+

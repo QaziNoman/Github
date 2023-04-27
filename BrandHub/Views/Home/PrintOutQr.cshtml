@@ -1,0 +1,102 @@
+﻿@section Scripts{
+    <link href="~/css/printqr.css" rel="stylesheet" />
+}
+<script>
+
+    $(document).ready(function () {
+        $("#Continue").click(function () {
+            var refNo = @Html.Raw(Json.Serialize(ViewBag.RefNo));
+            var ans = $('#station').val();
+            var question = "Select printer"
+            $.ajax(
+                {
+                    type: 'POST',
+                    dataType: 'JSON',
+                    url: '/OrderListtable/QuestionSubmittion',
+                    data: { reference: refNo, answer: ans, question: question },
+                    success:
+                        function (response) {
+                               
+                            window.location.href = "/home/LabelStuck?refNo=" + refNo;
+                         
+                            // Generate HTML table.
+                            // convertJsonToHtmlTable(JSON.parse(response), $("#TableId"));
+                        },
+                    error:
+                        function (response) {
+                            // alert("Error: " + response);
+                        }
+                });
+        });
+    });
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: '/OrderListtable/GetStation',
+                data: '{}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success:  function (response) {
+                   
+                    $.each(response, function(index, item) {
+                       
+                        $('#station').append($('<option value='+item.stationID+'></option>').text(item.stationID
+));
+        })
+
+
+
+                    ///$('#station').append($("<option></option>").text(response.stationID)
+
+
+                }
+                                 ,
+                failure: function (response) {
+
+                    $(".center-body").hide();
+                    alert(response.d);
+                },
+                error: function (response) {
+                    $(".center-body").hide();
+                    alert(response.d);
+                }
+            });
+        });
+</script>
+
+<div class="container">
+    <div class="row">
+        <div class=" bh-main-container col-md-12">
+            <div class=" bh-main-container-p col-md-12">
+            <p> Print Out QR code labels for Pallets</p></div>
+     </div>
+    @* <div class="bh-main-container-item col-md-12 d-inline-flex align-content-center">
+         <div class="col-sm-5 align-content-end">
+             <span>Select printer:</span>
+
+         </div>
+         <div class="col-2">
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+         </div>
+     </div>*@
+        <div class=" bh-main-content d-flex justify-content-evenly">
+            <div><span class="bh-qr-p">Select printer:</span></div>
+            <div>
+                <select style="margin-top: 4%;height:56px;" class="form-select" id="station" aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                    
+                </select></div>
+            <div style="margin-top: 10px;">
+                <button type="button" id="Continue" class="btn btn-light bh-continue-button">Continue <i class="fa-solid fa-circle-arrow-right"></i></button>
+            </div>
+
+            </div>
+
+    </div>
+</div>
+

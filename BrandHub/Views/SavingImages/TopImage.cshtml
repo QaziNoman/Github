@@ -1,0 +1,90 @@
+﻿@section Scripts{
+    <script src="~/js/webcam_html5_asp.net/webcam.js"></script>
+    <link href="~/css/palletpicture.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $(function () {
+
+
+            Webcam.set({
+                width: 594,
+                height: 480,
+
+            });
+            Webcam.attach('#webcam');
+            $("#btnCapture").click(function () {
+                debugger;
+                Webcam.snap(function (data_uri) {
+                    Webcam.reset();
+                    document.getElementById('webcam').innerHTML = '<img id="imgCapture" src="' + data_uri + '"/>';
+                });
+            });
+
+            $("#cancel").click(function () {
+                Webcam.attach('#webcam');
+
+            });
+
+
+            $('#Continue').click(function () {
+                var refer = @Html.Raw(Json.Serialize(ViewBag.refer));
+                var da = $("#imgCapture")[0].src;
+                var question = "Take picture of Top of  pallet #1";
+                   
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'JSON',
+                    url: "/SavingImages/SaveImage",
+                    data: { dat: da, Imagequestion: question, refNo: refer },
+
+                    success: function (r) {
+
+                        var count = @Html.Raw(Json.Serialize(ViewBag.counter));
+                        var palletNumber = @Html.Raw(Json.Serialize(ViewBag.Pallet ));
+                        if (count < palletNumber) {
+                            count = count + 1;
+                             window.location.href = "/SavingImages/TopImage?refNo=" + refer + "&counter=" + count + "&PalletNo=" + palletNumber;
+                        }
+                        else {
+                           
+                        window.location.href = "/SavingImages/LeftImage?refNo=" + refer + "&counter=" +1 + "&PalletNo=" + palletNumber;
+
+                        }
+
+
+
+
+
+                    }
+                });
+            })
+
+
+
+
+
+
+        });
+    </script>
+
+}
+<div class="container">
+    <div class="row">
+        <div class="">
+            <p class="bh-main-container-p">Take picture from top of  pallet  @Html.Raw(Json.Serialize(ViewBag.counter))</p>
+        </div>
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="bh-image-preview col-md-12 col-sm-6 col-lg-6 ">
+                <div id="webcam"></div>
+                <button class="bh-image-preview-button-yes" id="btnCapture"><i class="fa-solid fa-circle-check"></i></button>
+                <button class="bh-image-preview-button-no" id="cancel"><i class="fa-solid fa-circle-xmark"></i></button>
+            </div>
+
+
+        </div>
+           <div class="col-md-12 col-sm-12 col-lg-12 bh-continue-button-dev">
+         <button type="button" id="Continue" class="btn btn-light bh-continue-button">Continue <i class="fa-solid fa-circle-arrow-right"></i></button>
+        </div>
+
+    </div>
+
+</div>
